@@ -1,9 +1,9 @@
 const router = require('koa-router')()
-const HomeController = require('./controller/home')
+const HomeController = require('./controller/email')
 module.exports = (app) => {
-  router.get( '/', HomeController.index )
-  router.get('/home', HomeController.home)
-  router.post('/user/register', HomeController.register)
+  router.get( '/emailapi/getCode', HomeController.getCode )
+  router.get('/emailapi/checkCode', HomeController.checkCode)
+  router.post('/emailapi/register', HomeController.register)
   app.use(router.routes())
      .use(router.allowedMethods())
 }

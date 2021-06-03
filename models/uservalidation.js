@@ -1,3 +1,5 @@
+/* jshint indent: 1 */
+
 module.exports = function(sequelize, DataTypes) {
 	return sequelize.define('uservalidation', {
 		validationID: {
@@ -35,8 +37,8 @@ module.exports = function(sequelize, DataTypes) {
 			defaultValue: 'Email'
 		},
 		expiredTime: {
-			type: DataTypes.DATE,
-			allowNull: false
+			type: DataTypes.STRING(255),
+			allowNull: true
 		},
 		state: {
 			type: DataTypes.ENUM('未发送','发送成功','发送失败'),
