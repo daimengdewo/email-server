@@ -13,7 +13,8 @@ module.exports = function(sequelize, DataTypes) {
 		},
 		userEmail: {
 			type: DataTypes.STRING(60),
-			allowNull: true
+			allowNull: true,
+			unique: true
 		},
 		mPhone: {
 			type: DataTypes.CHAR(11),
@@ -31,24 +32,21 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.STRING(255),
 			allowNull: true
 		},
-		validMode: {
-			type: DataTypes.ENUM('phone','Email'),
-			allowNull: true,
-			defaultValue: 'Email'
-		},
 		expiredTime: {
-			type: DataTypes.STRING(255),
-			allowNull: true
+			type: DataTypes.INTEGER(20),
+			allowNull: false
 		},
 		state: {
-			type: DataTypes.ENUM('未发送','发送成功','发送失败'),
-			allowNull: true,
-			defaultValue: '未发送'
+			type: DataTypes.INTEGER(5),
+			allowNull: true
 		},
 		validType: {
-			type: DataTypes.ENUM('测试','注册','登录','找回密码'),
-			allowNull: true,
-			defaultValue: '测试'
+			type: DataTypes.INTEGER(5),
+			allowNull: true
+		},
+		validMode: {
+			type: DataTypes.INTEGER(5),
+			allowNull: true
 		}
 	}, {
 		tableName: 'uservalidation',

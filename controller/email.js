@@ -1,23 +1,28 @@
 const HomeService = require('../service/code')
 module.exports = {
   getCode: async(ctx, next) => {
-    let userMail = JSON.parse(JSON.stringify(ctx.query)).userMail
-
-    let index = await HomeService.getCode(userMail)
-    ctx.response.body = {code:200, data:index}
+    let {
+      userMail,uName,uPhone,vMode,vType
+    } = ctx.request.body
+    
+    try{
+      let index = await HomeService.getCode(userMail,uName,uPhone,vMode,vType)
+      ctx.response.body = index
+    }catch(e){
+      ctx.response.body = {errorMsg:e}
+    }
   },
   checkCode: async(ctx, next) => {
-    let userMail = JSON.parse(JSON.stringify(ctx.query)).userMail
-    let code = JSON.parse(JSON.stringify(ctx.query)).code
-
-    let index = await HomeService.checkCode(userMail,code)
-    ctx.response.body = {code:200, data:index}
-  },
-  register: async(ctx, next) => {
     let {
-      userMail
+      userMail,
+      userCode
     } = ctx.request.body
-    let index = await HomeService.register(userMail)
-    ctx.response.body = {code:200, data:index}
+
+    try{
+      let index = await HomeService.checkCode(userMail,userCode)
+      ctx.response.body = index
+    }catch(e){
+      ctx.response.body = {errorMsg:e}
+    }
   }
 }
